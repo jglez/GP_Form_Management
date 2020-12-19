@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { render } from 'react-dom'
 // 👉 App contains a more sophisticated form we'll flesh out later
 import App from './components/App'
@@ -10,8 +10,26 @@ const petsList = [
   { petName: 'Goldie', petType: 'fish' },
 ]
 
+// Default values for the form
+const initialValues = { petName: '', petType: '' }
+
 function SimpleForm() {
-  return <div>Ready to start GP!</div>
+
+  // State so we can track the pet objects we've added to our array
+  const [pets, setPets] = useState(petsList)
+
+  // State so we can store form values from the input
+  const [formValues, setFormValues] = useState(initialValues)
+
+  return (
+    <div className='container'>
+      <h1>Pets Form</h1>
+
+      {pets.map((pet, index) => {
+        return <div key={index}>{pet.petName} is a {pet.petType}</div>
+      })}
+    </div>
+  )
 }
 
 render(
