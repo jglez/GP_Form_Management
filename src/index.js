@@ -25,13 +25,23 @@ function SimpleForm() {
   const change = evt => {
     const { name, value } = evt.target
 
-    // We use setFormValues to update our state for our form and use special 
-    // syntax to override the previous values of name and value of formValues
-    // with our new values form the form input
+    // We use setFormValues to update our state for our form by using the spread
+    // operator to grab our previous form values and use special 
+    // override syntax to override the previous values of name and value of formValues
+    // with our new values form the form input (evt.target obj)
     setFormValues({ ...formValues, [name]: value })
   }
 
-  const submit = evt => { }
+  const submit = evt => {
+    evt.preventDefault()
+
+    const newPet = {
+      petName: formValues.petName.trim(),
+      petType: formValues.petType.trim()
+    }
+    setPets(pets.concat(newPet))
+    setFormValues(initialValues)
+  }
 
   return (
     <div className='container'>
