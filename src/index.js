@@ -33,13 +33,17 @@ function SimpleForm() {
   }
 
   const submit = evt => {
+    // Prevent full page reload
     evt.preventDefault()
 
     const newPet = {
       petName: formValues.petName.trim(),
       petType: formValues.petType.trim()
     }
+
     setPets(pets.concat(newPet))
+
+    // Reset form values for next form submission
     setFormValues(initialValues)
   }
 
@@ -54,6 +58,7 @@ function SimpleForm() {
 
       {/* We need to give our form an onSubmit function in order to be functional*/}
       <form onSubmit={submit}>
+
         <input
           // The prop name is to keep track of which input it is
           // It HAS to match with the properties pulled from formValues
@@ -87,8 +92,8 @@ function SimpleForm() {
 
 render(
   <>
-    <SimpleForm />
-    {/* <App /> */}
+    {/* <SimpleForm /> */}
+    <App />
   </>
   , document.querySelector('#root')
 )
