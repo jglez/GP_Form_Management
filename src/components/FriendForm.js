@@ -8,13 +8,21 @@ export default function FriendForm(props) {
     // 🔥 STEP 6 - IMPLEMENT the change handler for our inputs and dropdown
     // a) pull the name of the input from the event object
     // b) pull the value of the input from the event object
+    const { name, value } = evt.target
+
     // c) use the `update` callback coming in through props
+    update(name, value)
+
+    // We're calling updateForm which was passed through props as update
+    // name and value will become inputName and inputValue in updateForm
   }
 
   const onSubmit = evt => {
     // 🔥 STEP 7 - IMPLEMENT the submit handler
     // a) don't allow the browser to reload!
-    // c) use the `submit` callback coming in through props
+    evt.preventDefault()
+    // b) use the `submit` callback coming in through props
+    submit()
   }
 
   return (
@@ -32,8 +40,8 @@ export default function FriendForm(props) {
             name='username'
             type='text'
             value={values.username}
-            onChange={update}
-            placeholder='enter a username'
+            onChange={onChange}
+            placeholder='create a username'
             maxLength='12'
           />
         </label>
@@ -44,7 +52,7 @@ export default function FriendForm(props) {
             name='email'
             type='email'
             value={values.email}
-            onChange={update}
+            onChange={onChange}
             placeholder='enter your email'
           />
         </label>
@@ -54,10 +62,11 @@ export default function FriendForm(props) {
         {/* ////////// DROPDOWN ////////// */}
         <label>Role
           {/* 🔥 STEP 5 - Make dropdown for role. */}
-          <select>
-            <option>Instructor</option>
-            <option>TL</option>
-            <option>Student</option>
+          <select name='role' value={values.role} onChange={onChange}>
+            <option value=''>------select role------</option>
+            <option value='instructor'>Instructor</option>
+            <option value='student'>Student</option>
+            <option value='tl'>Team Lead</option>
           </select>
         </label>
 
